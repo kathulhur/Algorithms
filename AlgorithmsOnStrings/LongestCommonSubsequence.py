@@ -33,7 +33,7 @@ def assemble_lcs(X,Y,l,i,j):
             return assemble_lcs(X,Y,l,i-1,j-1) + X[i-1]
 
         else:
-            if l[i][j-1] < l[i-1][j]:
+            if l[i][j-1] > l[i-1][j]:
                 return assemble_lcs(X,Y,l,i,j-1)
             else:
                 return assemble_lcs(X,Y,l,i-1,j)
