@@ -1,4 +1,6 @@
 
+# Time: O(mn)
+# Space: O(mn)
 def compute_transform_tables(X, Y, Cc, Cr, Cd, Ci):
     m = len(X) + 1
     n = len(Y) + 1
@@ -37,7 +39,8 @@ def compute_transform_tables(X, Y, Cc, Cr, Cd, Ci):
 
     return costs, ops
 
-
+# Time: O(m + n)
+# Space O(1)
 def assemble_transformation(ops, i, j):
     if i == 0 and j == 0:
         return ""
