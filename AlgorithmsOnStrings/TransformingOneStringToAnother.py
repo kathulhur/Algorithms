@@ -10,30 +10,30 @@ def compute_transform_tables(X, Y, Cc, Cr, Cd, Ci):
 
     costs[0][0] = 0
     
-    for i in range(1, m):
+    for i in range(1, m): # fill the first column with delete cost and delete operation;
         costs[i][0] = i * Cd
         ops[i][0] = "del" + X[i-1]
 
-    for j in range(1, n):
+    for j in range(1, n): #fill the first column with insert cost and insert operation;
         costs[0][j] = j * Ci
         ops[0][j] = "ins" + Y[j-1]
 
     
     for i in range(1, m):
         for j in range(1, n):
-            if X[i-1] == Y[j-1]:
-                costs[i][j] = costs[i-1][j-1] + Cc
+            if X[i-1] == Y[j-1]: # if the characters matched; add the copy cost to the previous state
+                costs[i][j] = costs[i-1][j-1] + Cc 
                 ops[i][j] = "copy" + X[i-1]
-            else:
+            else: # if the characters doesn't match; add replace cost to the previous state
                 costs[i][j] = costs[i-1][j-1] + Cr
                 ops[i][j] = "rep" + X[i-1] + Y[j-1]
 
-            
+            # if the previous column cell added a delete cost if less than the current cost; replace its value
             if costs[i-1][j] + Cd < costs[i][j]:
                 costs[i][j] = costs[i-1][j] + Cd
                 ops[i][j] = "del" + X[i-1]
 
-            if costs[i][j-1] + Ci < costs[i][j]:
+            if costs[i][j-1] + Ci < costs[i][j]: # if the previous column cell added a insert cost if less than the current cost; replace its value
                 costs[i][j] = costs[i][j-1] + Ci
                 ops[i][j] = "ins" + Y[j-1]
 

@@ -13,30 +13,32 @@ def compute_lcs_table(X, Y):
     for j in range(n):
         l[0][j] = 0
 
+    # fill the table with the prefix subsequence counts
     for i in range(1,m):
         for j in range(1,n):
-            if X[i-1] == Y[j-1]:
-                l[i][j] = l[i-1][j-1] + 1
+            if X[i-1] == Y[j-1]:# if the characters of the two strings are the same
+                l[i][j] = l[i-1][j-1] + 1 # increment the value of the previous subsequence count
             
-            else:
-                l[i][j] = max(l[i][j-1], l[i-1][j])
+            else:# if the characters doesn't match
+                l[i][j] = max(l[i][j-1], l[i-1][j]) # Get the higher between the top and left cells of the table
     
     return l
 
 
+# recursive solution for reconstructing the subsequence
 def assemble_lcs(X,Y,l,i,j):
-    if l[i][j] == 0:
+    if l[i][j] == 0: # base case: stop when the value of the cell in the table becomes 0
         return ""
 
     else:
-        if X[i-1] == Y[j-1]:
-            return assemble_lcs(X,Y,l,i-1,j-1) + X[i-1]
+        if X[i-1] == Y[j-1]: # if the characters matches
+            return assemble_lcs(X,Y,l,i-1,j-1) + X[i-1] # make a recursive call and concatenate the character at the end
 
         else:
-            if l[i][j-1] > l[i-1][j]:
-                return assemble_lcs(X,Y,l,i,j-1)
+            if l[i][j-1] > l[i-1][j]: # if the left side of the grid is higher than the top side of the table
+                return assemble_lcs(X,Y,l,i,j-1) # make a recursive call going to the left side of the table
             else:
-                return assemble_lcs(X,Y,l,i-1,j)
+                return assemble_lcs(X,Y,l,i-1,j) # make a recursive call at the right side of the table
 
 X = "CATCGA"
 Y = "GTACCGTCA"
