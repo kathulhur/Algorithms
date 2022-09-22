@@ -38,5 +38,30 @@ def countingSort(A, n, m):
     return B
 
 
+# same with counting sort but uses only a single array instead of 3 separate for the equal, less, and next
+def betterCountingSort(A, n, m):
+    next = [0 for _ in range(m)]
+    # get the number of keys
+    for i in range(n):
+        key = A[i]
+        next[key] += 1
+    
+    # get the number of elements less than a key as well as the next indices for the keys
+    prev = 0
+    for i in range(1, m):
+        tmp = next[i]
+        next[i] = next[i-1] + prev
+        prev = tmp
+    
+    # sort the array
+    B = [0 for _ in range(n)]
+    for i in range(n):
+        key = A[i]
+        index = next[key]
+        B[index] = A[i]
+        next[key] += 1
+
+    return B
+
 if __name__ == '__main__':
-    print(countingSort([9, 8, 7, 6, 0, 3, 5, 4, 3, 2, 1], 11, 10))
+    print(betterCountingSort([9, 8, 7, 6, 0, 3, 5, 4, 3, 2, 1, 7], 12, 10))
