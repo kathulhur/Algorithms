@@ -13,6 +13,7 @@ This repo contains implementation of algorithms
 * [Insertion sort](https://github.com/kathulhur/Algorithms/blob/main/Sorting/insertionSort.py)
 * [Merge sort](https://github.com/kathulhur/Algorithms/blob/main/Sorting/mergeSort.py)
 * [Quick sort](https://github.com/kathulhur/Algorithms/blob/main/Sorting/quickSort.py)
+* [Counting sort](https://github.com/kathulhur/Algorithms/blob/main/Sorting/countingSort.py)
 
 
 ## [Searching Algorithms](https://github.com/kathulhur/Algorithms/tree/main/Searching)
