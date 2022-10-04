@@ -32,7 +32,6 @@ def topologicalSort(G):
 
 def DAGShortestPaths(G, s, weights):
     l = topologicalSort(G)
-
     shortest = [float('inf') for _ in range(len(G))]
     shortest[s] = 0
 
@@ -56,7 +55,7 @@ if __name__ == '__main__':
             [5],
             []
         ],
-        0, 
+        1, 
         [
             [0, 0, 2, 6, 0, 0],
             [5, 0, 3, 0, 0, 0],
